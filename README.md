@@ -1,4 +1,4 @@
 # AlainPerez
-Programming Projects [Full Stack/Python/Java/SQL]
+Programming Projects [Front-End/Python/HTML/CSS/JavaScript/SQL]
 
-Resume - Programming Project Samples
+Project Portfolio
