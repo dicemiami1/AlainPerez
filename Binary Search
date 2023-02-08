@@ -1,0 +1,15 @@
+def binary_search(A, l, h, k):
+  if h >= 1:
+    mid = 1 + (h - 1)/2
+  if A[mid] == k:
+    return 'k is found'
+  elif A[mid] > k:
+    return binary_search(A, l, mid-1, k)
+  else:
+    return binary_search(A, mid+1, h, k)
+  else:
+return 'k is not found'
+A = [1, 2, 7, 12, 28, 31, 40, 41, 42, 46, 59]
+k = 46; 1 = 0; h = len(A) - 1;
+print binary_search(A, l, h, k)
+
