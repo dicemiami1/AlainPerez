@@ -1,0 +1,62 @@
+#import queue, threading and time
+import queue
+import threading
+import time
+exitFlag = 0
+class priorityThread (threading.Thread):
+ #again, overriding init
+  def init(self, threadID, name, counter):
+   threading.Thread.init(self)
+   self.threadID = threadID
+   self.name = name
+   self.counter = counter
+  def run(self):
+   print ("Starting " + self.name)
+   print_time(self.name, self.counter)
+   print ("Exiting " + self.name)
+#process the thread
+def print_time(threadName, counter):
+  while not exitFlag:
+   #acqiure a lock
+   #if the queue's not empty,
+   qLock.acquire()
+   if not workQueue.empty():
+     threadNum = counter.get()
+     qLock.release()
+    
+     #print out the name and time
+     #now we add the thread num on the end
+     print("%s: %s: %s" % (threadName, time.ctime(time.time()), threadNum))
+   else:
+     qLock.release()
+     time.sleep(1)
+threadList = ["Thread-1", "Thread-2", "Thread-3"]
+nameList = ["#1", "#2", "#3", "#4", "#5"]
+#new lock
+qLock = threading.Lock()
+#create the queue
+workQueue = queue.Queue(10)
+threads = []
+threadID = 1
+# Create new threads
+# and loop through them
+for tName in threadList:
+  thread = priorityThread(threadID, tName, workQueue)
+  thread.start()
+  threads.append(thread)
+  threadID += 1
+# Fill the queue
+qLock.acquire()
+for word in nameList:
+  workQueue.put(word)
+#release lock
+qLock.release()
+# Wait for queue to be empty
+while not workQueue.empty():
+  pass
+# Notify threads that it's OK to exit
+exitFlag = 1
+# Wait for all threads to terminate
+for th in threads:
+  th.join()
+print ("Exiting Main Thread")
