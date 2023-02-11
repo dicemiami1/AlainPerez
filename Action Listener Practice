@@ -1,0 +1,53 @@
+package eventdriven; 
+import java.awt.event.*;
+import javax.swing.*;
+public class EventDriven {
+  //Frames, panels, and header text
+  private JFrame f;
+  private JLabel header;
+  private JLabel msg;
+  private JPanel statusPanel;
+  public EventDriven(){
+    prepareGUI();
+  }
+  public static void main(String[] args) {
+    EventDriven swingControlDemo = new EventDriven();
+    swingControlDemo.showEventDemo();
+  }
+  private void prepareGUI(){
+    f = new JFrame("Example GUI Action Listener");
+  f.setSize(400,400);
+  f.setLocation(625, 50);
+  f.setLayout(new FlowLayout());
+  header = new JLabel("",JLabel.CENTER);
+  msg = new JLabel("",JLabel.CENTER);
+  msg.setSize(350,100);
+ f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    statusPanel = new JPanel();
+    statusPanel.setLayout(new FlowLayout());
+    f.add(header);
+    f.add(statusPanel);
+    f.add(msg);
+    f.setVisible(true);
+  }
+  private void showEventDemo(){
+    header.setText("Example for Github");
+    JLabel lblUserName = new JLabel("Enter User Name");
+    final JTextField txtUserName = new JTextField();
+    txtUserName.setColumns(14);
+    JButton submitButton = new JButton("Submit");
+    submitButton.setActionCommand("Submit");
+    //add the action listener here and display user name
+    submitButton.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        String userName = txtUserName.getText();
+        msg.setText("User Name = " + userName);
+        
+      }
+    });
+    statusPanel.add(lblUserName);
+    statusPanel.add(txtUserName);
+    statusPanel.add(submitButton);
+    f.setVisible(true);
+  }
+}
