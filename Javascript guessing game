@@ -1,0 +1,32 @@
+let secretNumber = Math.floor(Math.random() * 10) + 1;
+let guesses = [];
+let numGuesses = 0;
+
+console.log("Welcome to the Guess the Number game!");
+console.log("I'm thinking of a number between 1 and 10. Can you guess it?");
+
+while (numGuesses < 5) {
+  let guess = parseInt(prompt("Enter your guess:"));
+
+  if (isNaN(guess)) {
+    console.log("Invalid input. Please enter a number.");
+    continue;
+  }
+
+  guesses.push(guess);
+
+  if (guess == secretNumber) {
+    console.log("Congratulations! You guessed the number in " + (numGuesses + 1) + " tries!");
+    break;
+  } else if (guess < secretNumber) {
+    console.log("Too low. Try again.");
+  } else {
+    console.log("Too high. Try again.");
+  }
+
+  numGuesses++;
+}
+
+if (numGuesses == 5) {
+  console.log("Sorry, you ran out of guesses. The number was " + secretNumber);
+}
